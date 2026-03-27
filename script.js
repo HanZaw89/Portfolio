@@ -48,24 +48,37 @@ document.addEventListener('DOMContentLoaded', () => {
         isTicking = false;
     };
 
-    const requestParallaxUpdate = (x, y) => {
-        targetX = (x / window.innerWidth - 0.5) * 2;
-        targetY = (y / window.innerHeight - 0.5) * 2;
+    const requestParallaxUpdate = (nx, ny) => {
+        targetX = nx;
+        targetY = ny;
         if (!isTicking) {
             requestAnimationFrame(updateParallax);
             isTicking = true;
         }
     };
 
+    // Desktop: Mouse tracking
     document.addEventListener('mousemove', e => {
-        requestParallaxUpdate(e.clientX, e.clientY);
+        const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+        const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+        requestParallaxUpdate(nx, ny);
     });
 
-    document.addEventListener('touchmove', e => {
-        if (e.touches.length > 0) {
-            requestParallaxUpdate(e.touches[0].clientX, e.touches[0].clientY);
+    // Mobile: Gyroscope (Device Orientation) tracking for 60fps true parallax
+    window.addEventListener('deviceorientation', e => {
+        if (e.gamma !== null && e.beta !== null) {
+            // e.gamma is left-to-right tilt in degrees (-90 to 90)
+            // e.beta is front-to-back tilt in degrees (-180 to 180)
+
+            // Normalize tilt values roughly between -1 and 1
+            const nx = Math.max(-1, Math.min(1, e.gamma / 45)); 
+            
+            // Assume 45 degress resting angle for phone (beta is usually 30-60 when holding phone).
+            const ny = Math.max(-1, Math.min(1, (e.beta - 45) / 45));
+            
+            requestParallaxUpdate(nx, ny);
         }
-    }, { passive: true });
+    }, true);
 
     // Back to top button functionality
     const backToTopBtn = document.getElementById('backToTop');
