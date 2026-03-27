@@ -356,12 +356,16 @@ body {
 }
 
 .embed-container.facebook {
-    aspect-ratio: 380 / 560;
-    /* Taller aspect ratio to prevent caption cropping on desktop */
-    height: auto;
+    /* 476/380 = 1.2526 (Video proportional scaling) + 90px fixed absolute height for text wrapping */
+    padding-bottom: calc(125.26% + 90px);
+    height: 0;
+    position: relative;
 }
 
 .embed-container.facebook iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100% !important;
 }
@@ -507,9 +511,4 @@ a.role-badge:hover {
 /* Mobile Performance Optimizations */
 @media (max-width: 768px) {
     /* (Cleared old filter hacks since blurs are removed globally) */
-
-    .embed-container.facebook {
-        /* Text wraps on smaller screens requiring even more vertical height */
-        aspect-ratio: 380 / 600;
-    }
 }
