@@ -56,8 +56,9 @@ body {
     overflow: hidden;
     pointer-events: none;
     background: linear-gradient(135deg, #09090b 0%, #1e1b4b 100%);
-    transform: translate(calc(var(--global-mouse-x, 0) * -3vmax), calc(var(--global-mouse-y, 0) * -3vmax));
+    transform: translate3d(calc(var(--global-mouse-x, 0) * -3vmax), calc(var(--global-mouse-y, 0) * -3vmax), 0);
     transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
 }
 
 .blobs-container::after {
@@ -97,6 +98,7 @@ body {
         aurora-drift 25s infinite alternate ease-in-out,
         pulse 12s infinite alternate ease-in-out;
     z-index: 1;
+    will-change: transform, opacity;
 }
 
 .blob-1 {
@@ -497,4 +499,19 @@ a.role-badge:hover {
 .glass-back-btn:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-5px);
+}
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+    .blobs-container::after {
+        display: none; /* Disable expensive SVG noise filter on mobile */
+    }
+    
+    .blob {
+        filter: blur(80px); /* Smaller blur radius for better performance */
+    }
+    
+    .blobs-container::before {
+        filter: blur(80px); /* Scale down inner background glow filter */
+    }
 }
