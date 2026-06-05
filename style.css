@@ -508,19 +508,56 @@ a.role-badge:hover {
     transform: translateY(-5px);
 }
 
+/* Hero Flex / Grid Layout for Responsive Screens */
+.hero-flex-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.hero-main-info {
+    width: 100%;
+}
+
+.hero-action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+.action-row-1 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.action-row-2 {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
 /* Ongoing Project Widget */
 .ongoing-project {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     padding: 1.5rem;
-    margin: 0 auto 2rem;
+    margin: 0 auto;
+    width: 100%;
     max-width: 500px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    text-align: left;
 }
 
 .ongoing-project:hover {
@@ -587,54 +624,110 @@ a.role-badge:hover {
 
 .project-socials {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
 }
 
 .social-shortcut {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.6rem 1.2rem;
-    border-radius: 999px;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.75rem 1.25rem;
+    border-radius: 16px;
     color: #fff;
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    width: 100%;
+}
+
+.social-link-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.arrow-icon {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    transition: transform 0.3s ease;
 }
 
 .social-shortcut:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.08);
 }
 
-.social-shortcut i {
-    font-size: 1.1rem;
+.social-shortcut:hover .arrow-icon {
+    transform: translateX(4px);
+    opacity: 1;
 }
 
 .social-shortcut.tiktok:hover {
-    background: rgba(255, 45, 85, 0.15);
     border-color: rgba(255, 45, 85, 0.4);
-    box-shadow: 0 5px 15px rgba(255, 45, 85, 0.25);
     color: #ff2d55;
+    background: rgba(255, 45, 85, 0.1);
 }
 
 .social-shortcut.facebook:hover {
-    background: rgba(24, 119, 242, 0.15);
     border-color: rgba(24, 119, 242, 0.4);
-    box-shadow: 0 5px 15px rgba(24, 119, 242, 0.25);
     color: #1877f2;
+    background: rgba(24, 119, 242, 0.1);
 }
 
 .social-shortcut.youtube:hover {
-    background: rgba(255, 0, 0, 0.15);
     border-color: rgba(255, 0, 0, 0.4);
-    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.25);
     color: #ff0000;
+    background: rgba(255, 0, 0, 0.1);
+}
+
+/* Desktop Media Queries for Side-by-Side Hero Card */
+@media (min-width: 992px) {
+    .hero-content {
+        max-width: 1100px;
+        padding: 4rem;
+    }
+    
+    .hero-flex-container {
+        flex-direction: row;
+        gap: 4rem;
+        align-items: center;
+    }
+    
+    .hero-main-info {
+        flex: 1.2;
+        text-align: left;
+    }
+    
+    .hero-main-info .gradient-text {
+        font-size: 4.5rem;
+    }
+    
+    .hero-main-info .bio {
+        margin-bottom: 2rem;
+    }
+    
+    .ongoing-project {
+        flex: 0.8;
+        max-width: 400px;
+    }
+    
+    .hero-action-buttons {
+        align-items: flex-start;
+    }
+    
+    .action-row-1 {
+        justify-content: flex-start;
+    }
+    
+    .action-row-2 {
+        justify-content: flex-start;
+    }
 }
 
 /* Mobile Performance Optimizations */
