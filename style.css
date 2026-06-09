@@ -557,6 +557,14 @@ a.role-badge:hover {
     align-items: center;
 }
 
+.contact-note {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-top: 1.5rem;
+    line-height: 1.5;
+    opacity: 0.85;
+}
+
 /* Life & Bytes Vlog Section inside Hero */
 .life-bytes-section {
     margin-top: 2.5rem;
